@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import aima.core.search.csp.Assignment;
@@ -38,15 +39,15 @@ public class Main {
 		String[] cigarettes = {"Old Gold", "Kools", "Chesterfields", "Lucky Strike", "Parliaments"};
 		String[] drink = {"Water", "Orange juice", "Tea", "Coffee", "Milk"};
 		String[] pet = {"Zebra", "Dog", "Fox", "Snails", "Horse"};
+
 		
-		// TODO create variables, e.g.,
-		// Variable var1 = new Variable("name of the variable 1");
-		// Variable var2 = new Variable("name of the variable 2");
-		
-		List<Variable> variables = null;
-		// TODO add all your variables to this list, e.g.,
-		// variables.add(var1);
-		// variables.add(var2);
+		List<Variable> variables = new ArrayList<>();
+        getAllVariblesInList(colors, variables);
+        getAllVariblesInList(nations, variables);
+        getAllVariblesInList(cigarettes, variables);
+        getAllVariblesInList(drink, variables);
+        getAllVariblesInList(pet, variables);
+
 		
 		csp = new CSP(variables);
 
@@ -65,9 +66,17 @@ public class Main {
 		return csp;
 	}
 
+	private static void getAllVariblesInList(String[] list, List<Variable> v){
+
+        for (String x:list) {
+            Variable newVar = new Variable(x);
+            v.add(newVar);
+        }
+    }
+
 	private static void printSolution(Assignment solution) {
 		// TODO print out useful answer
-		
+
 		// You can use the following to get the value assigned to a variable:
 		// Object value = solution.getAssignment(var); 
 		// For debugging it might be useful to print the complete assignment and check whether
