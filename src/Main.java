@@ -67,6 +67,7 @@ public class Main {
 
 	private static void printSolution(Assignment solution) {
 		// TODO print out useful answer
+		
 		// You can use the following to get the value assigned to a variable:
 		// Object value = solution.getAssignment(var); 
 		// For debugging it might be useful to print the complete assignment and check whether
