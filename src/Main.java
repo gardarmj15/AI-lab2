@@ -109,24 +109,6 @@ public class Main {
 		
 		csp = new CSP(variables);
 
-		Domain houses = new Domain(new Integer[]{1, 2, 3, 4, 5});
-
-		
-		// TODO add constraints, e.g.,
-		csp.addConstraint(new EqualConstraint(english, red));
-		csp.addConstraint(new EqualConstraint(spanish, dog));
-		csp.addConstraint(new EqualConstraint(coffee, green));
-		csp.addConstraint(new EqualConstraint(ukrainian, tea));
-		csp.addConstraint(new EqualConstraint(oldGold, snails));
-		csp.addConstraint(new EqualConstraint(kools, yellow));
-		csp.addConstraint(new EqualConstraint(luckyStrike, orangeJuice));
-		csp.addConstraint(new EqualConstraint(japanese, parliaments));
-
-		csp.addConstraint(new SuccessorConstraint(ivory, green));
-		csp.addConstraint(new SuccessorConstraint(norwegian, blue));
-
-		csp.addConstraint(new DifferByOneConstraint(kools, fox));
-
 		csp.setDomain(red, new Domain(new Integer[]{1,2,3,4,5}));
 		csp.setDomain(blue, new Domain(new Integer[]{1,2,3,4,5}));
 		csp.setDomain(ivory, new Domain(new Integer[]{1,2,3,4,5}));
@@ -157,20 +139,128 @@ public class Main {
 		csp.setDomain(snails, new Domain(new Integer[]{1,2,3,4,5}));
 		csp.setDomain(horse, new Domain(new Integer[]{1,2,3,4,5}));
 
+		// The Englishman lives in the red house.
+		csp.addConstraint(new EqualConstraint(english, red));
 
-		//csp.addConstraint(new DifferByOneConstraint(var1, var2)); // meaning var1 == var2 + 1 or var1 == var2 - 1
-		// csp.addConstraint(new NotEqualConstraint(var1, var2)); // meaning var1 != var2
-		// csp.addConstraint(new EqualConstraint(var1, var2)); // meaning var1 == var2
-		// csp.addConstraint(new SuccessorConstraint(var1, var2)); // meaning var1 == var2 + 1
-		// csp.addConstraint(new DifferByOneConstraint(var1, var2)); // meaning var1 == var2 + 1 or var1 == var2 - 1 
-		
+		// The Spaniard owns the dog.
+		csp.addConstraint(new EqualConstraint(spanish, dog));
+
+		// Coffee is drunk in the green house.
+		csp.addConstraint(new EqualConstraint(coffee, green));
+
+		// The Ukrainian drinks tea.
+		csp.addConstraint(new EqualConstraint(ukrainian, tea));
+
+		// The green house is immediately to the right of the ivory house.
+		csp.addConstraint(new SuccessorConstraint(green, ivory));
+
+		// The Old Gold smoker owns snails.
+		csp.addConstraint(new EqualConstraint(oldGold, snails));
+
+		// Kools are smoked in the yellow house.
+		csp.addConstraint(new EqualConstraint(kools, yellow));
+
+		// The man who smokes Chesterfields lives in the house next to the man with the fox.
+		csp.addConstraint(new DifferByOneConstraint(chesterfields, fox));
+
+		// Kools are smoked in the house next to the house where the horse is kept.
+		csp.addConstraint(new DifferByOneConstraint(kools, horse));
+
+		// The Lucky Strike smoker drinks orange juice.
+		csp.addConstraint(new EqualConstraint(luckyStrike, orangeJuice));
+
+		// The Japanese smokes Parliaments.
+		csp.addConstraint(new EqualConstraint(japanese, parliaments));
+
+		// The Norwegian lives next to the blue house.
+		csp.addConstraint(new DifferByOneConstraint(norwegian, blue));
+
+		//Colors
+		//Red
+		csp.addConstraint(new NotEqualConstraint(red, yellow));
+		csp.addConstraint(new NotEqualConstraint(red, blue));
+		csp.addConstraint(new NotEqualConstraint(red, ivory));
+		csp.addConstraint(new NotEqualConstraint(red, green));
+		//Yellow
+		csp.addConstraint(new NotEqualConstraint(yellow, blue));
+		csp.addConstraint(new NotEqualConstraint(yellow, ivory));
+		csp.addConstraint(new NotEqualConstraint(yellow, green));
+		//Blue
+		csp.addConstraint(new NotEqualConstraint(blue, ivory));
+		csp.addConstraint(new NotEqualConstraint(blue, green));
+		//Ivory
+		csp.addConstraint(new NotEqualConstraint(ivory, green));
+
+		//Nationality
+		//English
+		csp.addConstraint(new NotEqualConstraint(english, spanish));
+		csp.addConstraint(new NotEqualConstraint(english, norwegian));
+		csp.addConstraint(new NotEqualConstraint(english, japanese));
+		csp.addConstraint(new NotEqualConstraint(english, ukrainian));
+		//Spanish
+		csp.addConstraint(new NotEqualConstraint(spanish, norwegian));
+		csp.addConstraint(new NotEqualConstraint(spanish, japanese));
+		csp.addConstraint(new NotEqualConstraint(spanish, ukrainian));
+		//Norwegian
+		csp.addConstraint(new NotEqualConstraint(norwegian, japanese));
+		csp.addConstraint(new NotEqualConstraint(norwegian, ukrainian));
+		//Japanese
+		csp.addConstraint(new NotEqualConstraint(japanese, ukrainian));
+
+		//Drinks
+		//Coffee
+		csp.addConstraint(new NotEqualConstraint(coffee, milk));
+		csp.addConstraint(new NotEqualConstraint(coffee, water));
+		csp.addConstraint(new NotEqualConstraint(coffee, orangeJuice));
+		csp.addConstraint(new NotEqualConstraint(coffee, tea));
+		//Milk
+		csp.addConstraint(new NotEqualConstraint(milk, water));
+		csp.addConstraint(new NotEqualConstraint(milk, orangeJuice));
+		csp.addConstraint(new NotEqualConstraint(milk, tea));
+		//Water
+		csp.addConstraint(new NotEqualConstraint(water, orangeJuice));
+		csp.addConstraint(new NotEqualConstraint(water, tea));
+		//Orange Juice
+		csp.addConstraint(new NotEqualConstraint(orangeJuice, tea));
+
+		//Cigs
+		//Kools
+		csp.addConstraint(new NotEqualConstraint(kools, parliaments));
+		csp.addConstraint(new NotEqualConstraint(kools, luckyStrike));
+		csp.addConstraint(new NotEqualConstraint(kools, oldGold));
+		csp.addConstraint(new NotEqualConstraint(kools, chesterfields));
+		//Parliaments
+		csp.addConstraint(new NotEqualConstraint(parliaments, luckyStrike));
+		csp.addConstraint(new NotEqualConstraint(parliaments, oldGold));
+		csp.addConstraint(new NotEqualConstraint(parliaments, chesterfields));
+		//Lucky Strike
+		csp.addConstraint(new NotEqualConstraint(luckyStrike, oldGold));
+		csp.addConstraint(new NotEqualConstraint(luckyStrike, chesterfields));
+		//Old Gold
+		csp.addConstraint(new NotEqualConstraint(oldGold, chesterfields));
+
+		//Pets
+		//Zebra
+		csp.addConstraint(new NotEqualConstraint(zebra, dog));
+		csp.addConstraint(new NotEqualConstraint(zebra, snails));
+		csp.addConstraint(new NotEqualConstraint(zebra, horse));
+		csp.addConstraint(new NotEqualConstraint(zebra, fox));
+		//Dog
+		csp.addConstraint(new NotEqualConstraint(dog, snails));
+		csp.addConstraint(new NotEqualConstraint(dog, horse));
+		csp.addConstraint(new NotEqualConstraint(dog, fox));
+		//Snails
+		csp.addConstraint(new NotEqualConstraint(snails, horse));
+		csp.addConstraint(new NotEqualConstraint(snails, fox));
+		//Horse
+		csp.addConstraint(new NotEqualConstraint(horse, fox));
+
 		return csp;
 	}
 
 	private static void printSolution(Assignment solution) {
 		// TODO print out useful answer
 		// You can use the following to get the value assigned to a variable:
-		// Object value = solution.getAssignment(var); 
 		// For debugging it might be useful to print the complete assignment and check whether
 		// it makes sense.
 		System.out.println("solution:" + solution);
