@@ -40,24 +40,125 @@ public class Main {
 		String[] drink = {"Water", "Orange juice", "Tea", "Coffee", "Milk"};
 		String[] pet = {"Zebra", "Dog", "Fox", "Snails", "Horse"};
 
-		
-		List<Variable> variables = new ArrayList<>();
-        getAllVariblesInList(colors, variables);
-        getAllVariblesInList(nations, variables);
-        getAllVariblesInList(cigarettes, variables);
-        getAllVariblesInList(drink, variables);
-        getAllVariblesInList(pet, variables);
+		//Colors
+		Variable red = new Variable("Red");
+		Variable green = new Variable("Green");
+		Variable ivory = new Variable("Ivory");
+		Variable yellow = new Variable("Yellow");
+		Variable blue = new Variable("Blue");
 
+		//Nations
+		Variable english = new Variable("Englishman");
+		Variable spanish = new Variable("Spaniard");
+		Variable norwegian = new Variable("Norwegian");
+		Variable ukrainian = new Variable("Ukrainian");
+		Variable japanese = new Variable("Japanese");
+
+		//Cigarettes
+		Variable oldGold = new Variable("Old Gold");
+		Variable kools = new Variable("Kools");
+		Variable chesterfields = new Variable("Chesterfields");
+		Variable luckyStrike = new Variable("Lucky Strike");
+		Variable parliaments = new Variable("Parliaments");
+
+		//Drinks
+		Variable water = new Variable("Water");
+		Variable orangeJuice = new Variable("Orange juice");
+		Variable tea = new Variable("Tea");
+		Variable coffee = new Variable("Coffee");
+		Variable milk = new Variable("Milk");
+
+		//Drinks
+		Variable zebra = new Variable("Zebra");
+		Variable dog = new Variable("Dog");
+		Variable fox = new Variable("Fox");
+		Variable snails = new Variable("Snails");
+		Variable horse = new Variable("Horse");
+
+		List<Variable> variables = new ArrayList<>();
+
+		variables.add(red);
+		variables.add(green);
+		variables.add(ivory);
+		variables.add(yellow);
+		variables.add(blue);
+
+		variables.add(english);
+		variables.add(spanish);
+		variables.add(norwegian);
+		variables.add(ukrainian);
+		variables.add(japanese);
+
+		variables.add(oldGold);
+		variables.add(kools);
+		variables.add(chesterfields);
+		variables.add(luckyStrike);
+		variables.add(parliaments);
+
+		variables.add(water);
+		variables.add(orangeJuice);
+		variables.add(tea);
+		variables.add(coffee);
+		variables.add(milk);
+
+		variables.add(zebra);
+		variables.add(dog);
+		variables.add(fox);
+		variables.add(snails);
+		variables.add(horse);
 		
 		csp = new CSP(variables);
 
-		// TODO set domains of variables, e.g.,
-		// Domain d1 = new Domain(new String[]{"foo", "bar"});
-		// csp.setDomain(var1, d1);
-		// Domain d2 = new Domain(new Integer[]{1, 2});
-		// csp.setDomain(var2, d2);
+		Domain houses = new Domain(new Integer[]{1, 2, 3, 4, 5});
+
 		
 		// TODO add constraints, e.g.,
+		csp.addConstraint(new EqualConstraint(english, red));
+		csp.addConstraint(new EqualConstraint(spanish, dog));
+		csp.addConstraint(new EqualConstraint(coffee, green));
+		csp.addConstraint(new EqualConstraint(ukrainian, tea));
+		csp.addConstraint(new EqualConstraint(oldGold, snails));
+		csp.addConstraint(new EqualConstraint(kools, yellow));
+		csp.addConstraint(new EqualConstraint(luckyStrike, orangeJuice));
+		csp.addConstraint(new EqualConstraint(japanese, parliaments));
+
+		csp.addConstraint(new SuccessorConstraint(ivory, green));
+		csp.addConstraint(new SuccessorConstraint(norwegian, blue));
+
+		csp.addConstraint(new DifferByOneConstraint(kools, fox));
+
+		csp.setDomain(red, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(blue, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(ivory, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(green, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(yellow, new Domain(new Integer[]{1,2,3,4,5}));
+
+		csp.setDomain(english, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(spanish, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(norwegian, new Domain(new Integer[]{1}));
+		csp.setDomain(ukrainian, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(japanese, new Domain(new Integer[]{1,2,3,4,5}));
+
+		csp.setDomain(milk, new Domain(new Integer[]{3}));
+		csp.setDomain(orangeJuice, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(coffee, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(tea, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(water, new Domain(new Integer[]{1,2,3,4,5}));
+
+		csp.setDomain(oldGold, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(chesterfields, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(kools, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(luckyStrike, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(parliaments, new Domain(new Integer[]{1,2,3,4,5}));
+
+		csp.setDomain(dog, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(zebra, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(fox, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(snails, new Domain(new Integer[]{1,2,3,4,5}));
+		csp.setDomain(horse, new Domain(new Integer[]{1,2,3,4,5}));
+
+
+		//csp.addConstraint(new DifferByOneConstraint(var1, var2)); // meaning var1 == var2 + 1 or var1 == var2 - 1
 		// csp.addConstraint(new NotEqualConstraint(var1, var2)); // meaning var1 != var2
 		// csp.addConstraint(new EqualConstraint(var1, var2)); // meaning var1 == var2
 		// csp.addConstraint(new SuccessorConstraint(var1, var2)); // meaning var1 == var2 + 1
@@ -66,17 +167,8 @@ public class Main {
 		return csp;
 	}
 
-	private static void getAllVariblesInList(String[] list, List<Variable> v){
-
-        for (String x:list) {
-            Variable newVar = new Variable(x);
-            v.add(newVar);
-        }
-    }
-
 	private static void printSolution(Assignment solution) {
 		// TODO print out useful answer
-
 		// You can use the following to get the value assigned to a variable:
 		// Object value = solution.getAssignment(var); 
 		// For debugging it might be useful to print the complete assignment and check whether
